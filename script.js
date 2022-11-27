@@ -57,3 +57,44 @@ function changePenguinImg(e) {
 }
 
 window.addEventListener("keydown", changePenguinImg);
+
+/* Challenge #3 */
+
+const textBoxInput = document.getElementById("text-box");
+
+const submitTextButton = document.getElementById("submit-text-button");
+
+function clickSubmitTextButtonAlert() {
+    alert(`This is what you typed in the text box: ${textBoxInput.value}`);
+}
+
+submitTextButton.addEventListener("click", clickSubmitTextButtonAlert);
+
+/* Challenge #4 */
+
+const hueRotatingPenguin = document.getElementById("hue-rotating-penguin");
+
+const mouseLocation = MouseEvent.clientX;
+
+function hueRotatePenguin(e) {
+    // hueRotatingPenguin.style.filter = `hue-rotate(${MouseEvent.clientX}deg)`; 
+
+    let mouseXPositionZeroToThreeSixty = 360 * e.clientX / window.innerWidth
+
+    hueRotatingPenguin.style.filter = `hue-rotate(${mouseXPositionZeroToThreeSixty}deg)`;
+
+    console.log("function HueRotatePenguin executed");
+    console.log(`e.clientX: ${e.clientX}`);
+    console.log(`window.innerWidth: ${window.innerWidth}`);
+    console.log(`mouseXPositionZeroToThreeSixty: ${mouseXPositionZeroToThreeSixty}`);
+    
+    /*  
+    make the left side of the browser 0 degrees and the right side 360 degrees 
+    */
+}
+
+window.addEventListener("mousemove", hueRotatePenguin);
+
+/* Challenge #5: 
+When someone presses the button, put the text they've entered underneath the button. Bonus points if you also empty out the text field when that happens.
+*/
