@@ -9,3 +9,7 @@ body {
 #reverse-button {
     background: yellowgreen;
 }
+
+#challenge-5-values {
+    white-space: pre;
+}

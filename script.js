@@ -94,7 +94,9 @@ function hueRotatePenguin(e) {
 window.addEventListener("mousemove", hueRotatePenguin);
 
 /* Challenge #5: 
-When someone presses the button, put the text they've entered underneath the button. Bonus points if you also empty out the text field when that happens.
+When someone presses the button, put the text they've entered underneath the button. 
+Bonus points if you also empty out the text field when that happens.
+When additional messages are submitted, append them below rather than replacing them.
 */
 
 const challenge5TextBox = document.getElementById("challenge-5-text-box");
@@ -104,9 +106,7 @@ const submitTextButtonChallenge5 = document.getElementById("submit-text-button-c
 submitTextButtonChallenge5.addEventListener('click', updateValue);
 
 function updateValue(e) {
-  textFromTextBox.textContent = challenge5TextBox.value;
+    textFromTextBox.append(challenge5TextBox.value, "\n");
   challenge5TextBox.value = "";
-
-    console.log("updateValue executed");
 
 }
