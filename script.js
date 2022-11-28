@@ -82,15 +82,13 @@ function hueRotatePenguin(e) {
     let mouseXPositionZeroToThreeSixty = 360 * e.clientX / window.innerWidth
 
     hueRotatingPenguin.style.filter = `hue-rotate(${mouseXPositionZeroToThreeSixty}deg)`;
-
+/*
     console.log("function HueRotatePenguin executed");
     console.log(`e.clientX: ${e.clientX}`);
     console.log(`window.innerWidth: ${window.innerWidth}`);
     console.log(`mouseXPositionZeroToThreeSixty: ${mouseXPositionZeroToThreeSixty}`);
     
-    /*  
-    make the left side of the browser 0 degrees and the right side 360 degrees 
-    */
+*/ 
 }
 
 window.addEventListener("mousemove", hueRotatePenguin);
@@ -98,3 +96,17 @@ window.addEventListener("mousemove", hueRotatePenguin);
 /* Challenge #5: 
 When someone presses the button, put the text they've entered underneath the button. Bonus points if you also empty out the text field when that happens.
 */
+
+const challenge5TextBox = document.getElementById("challenge-5-text-box");
+const textFromTextBox = document.getElementById('challenge-5-values');
+const submitTextButtonChallenge5 = document.getElementById("submit-text-button-challenge-5");
+
+submitTextButtonChallenge5.addEventListener('click', updateValue);
+
+function updateValue(e) {
+  textFromTextBox.textContent = challenge5TextBox.value;
+  challenge5TextBox.value = "";
+
+    console.log("updateValue executed");
+
+}
