@@ -94,19 +94,31 @@ function hueRotatePenguin(e) {
 window.addEventListener("mousemove", hueRotatePenguin);
 
 /* Challenge #5: 
-When someone presses the button, put the text they've entered underneath the button. 
-Bonus points if you also empty out the text field when that happens.
-When additional messages are submitted, append them below rather than replacing them.
+1. When someone presses the button, put the text they've entered underneath the button. 
+2. Bonus points if you also empty out the text field when that happens.
+3. When additional messages are submitted, append them below rather than replacing them.
+4. Make it so that the text in the to do list for each new entry gets bigger.
 */
 
 const challenge5TextBox = document.getElementById("challenge-5-text-box");
-const textFromTextBox = document.getElementById('challenge-5-values');
+const toDoList = document.getElementById("to-do-list");
 const submitTextButtonChallenge5 = document.getElementById("submit-text-button-challenge-5");
 
 submitTextButtonChallenge5.addEventListener('click', updateValue);
 
-function updateValue(e) {
-    textFromTextBox.append(challenge5TextBox.value, "\n");
-  challenge5TextBox.value = "";
+let textSizeIncrementor = 16;
 
+function updateValue() {
+    let newEntry = document.createElement("p");
+    
+    newEntry.textContent = challenge5TextBox.value;
+    newEntry.style.fontSize = `${textSizeIncrementor}px`;
+
+    toDoList.append(newEntry);
+
+    textSizeIncrementor++;
+
+    challenge5TextBox.value = "";
 }
+
+
