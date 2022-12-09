@@ -98,10 +98,13 @@ window.addEventListener("mousemove", hueRotatePenguin);
 2. Bonus points if you also empty out the text field when that happens.
 3. When additional messages are submitted, append them below rather than replacing them.
 4. Make it so that the text in the to do list for each new entry gets bigger.
-Incomplete:
 5. When an item gets added to the list, add a checkbox to the left side of the item.
 6. When a checkbox is checked, put a strike through the text of the item.
 7. For bonus points, if a checkbox gets unchecked, remove the strike through.
+8. Update the button to use something other than the "click" event for triggering its behavior.
+
+Incomplete:
+9. Update the checkboxes to use something other than "click" events for triggering their behavior. They should still work when you click on them, but they should also work if you use keyboard navigation to interaction.
 */
 
 const challenge5TextBox = document.getElementById("challenge-5-text-box");
@@ -109,6 +112,11 @@ const toDoList = document.getElementById("to-do-list");
 const submitTextButtonChallenge5 = document.getElementById("submit-text-button-challenge-5");
 
 submitTextButtonChallenge5.addEventListener('click', updateValue);
+challenge5TextBox.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        submitTextButtonChallenge5.click();
+    }
+});
 
 let textSizeIncrementor = 16;
 
@@ -144,3 +152,42 @@ function updateValue() {
     challenge5TextBox.value = "";
 }
 
+/* Challenge 6:
+Create a text box with a button for submission.
+Use the dog.CEO API to display a random image of a dog of the breed submitted to the text box.
+API URL: "https://dog.ceo/api/breeds/image/random"
+*/
+
+const challenge6Button = document.getElementById("submit-text-button-challenge-6");
+const challenge6TextBox = document.getElementById("challenge-6-text-box");
+const dogArea = document.getElementById("challenge-6-dog-pic-area");
+
+function clickChallenge6Button () {
+    const dogBreed = challenge6TextBox.value;
+
+    if (dogBreed === "") {
+        dogArea.textContent = "";
+        dogArea.append("You forgot to type a dog breed!");
+    }
+
+    else if (dogBreed != "") {
+        dogArea.textContent = "";
+        const dogPic = document.createElement("img");
+
+        fetch(`https://dog.ceo/api/breed/${dogBreed}/images/random`)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                    if (data.status === "error") {
+                        dogArea.innerHTML = "<p>I'm sorry, but that either isn't a dog breed, or it isn't a dog breed included in the <a href=\"dog.CEO\">dog.CEO</a> API.</p>\n<p>If the dog breed name is multiple words, try entering it with no spaces.</p>"
+                    }
+                    else {
+                        const dogPicUrl = data.message;
+                        dogPic.src = dogPicUrl;
+                        dogArea.append(dogPic);
+                    }
+            });
+    }
+}
+
+challenge6Button.addEventListener('click', clickChallenge6Button)
