@@ -152,7 +152,7 @@ function updateValue() {
     challenge5TextBox.value = "";
 }
 
-/* Challenge 6:
+/* Challenge #6:
 Create a text box with a button for submission.
 Use the dog.CEO API to display a random image of a dog of the breed submitted to the text box.
 API URL: "https://dog.ceo/api/breeds/image/random"
@@ -163,7 +163,9 @@ const challenge6TextBox = document.getElementById("challenge-6-text-box");
 const dogArea = document.getElementById("challenge-6-dog-pic-area");
 
 function clickChallenge6Button () {
-    const dogBreed = challenge6TextBox.value;
+    let dogBreed = challenge6TextBox.value;
+    dogBreed = dogBreed.toLowerCase();
+    dogBreed = dogBreed.replace(/ /g, "");
 
     if (dogBreed === "") {
         dogArea.textContent = "";
@@ -179,7 +181,7 @@ function clickChallenge6Button () {
             .then((data) => {
                 console.log(data);
                     if (data.status === "error") {
-                        dogArea.innerHTML = "<p>I'm sorry, but that either isn't a dog breed, or it isn't a dog breed included in the <a href=\"dog.CEO\">dog.CEO</a> API.</p>\n<p>If the dog breed name is multiple words, try entering it with no spaces.</p>"
+                        dogArea.innerHTML = "<p>I'm sorry, but that either isn't a dog breed, or it isn't a dog breed included in the <a href=\"https://dog.CEO\">dog.CEO</a> API.</p>"
                     }
                     else {
                         const dogPicUrl = data.message;
@@ -191,3 +193,50 @@ function clickChallenge6Button () {
 }
 
 challenge6Button.addEventListener('click', clickChallenge6Button)
+
+/*
+Challenge #7:
+1. As in the last assignment, use a text box and a button to accept user input. In this case, the user should input the name of a subreddit.
+2. Use the Reddit API to fetch the top ten posts in that subreddit. This API is very poorly documented, but the request would look like this for r/memes: https://www.reddit.com/r/memes/top.json?limit=10
+3. Display a list of the titles of all ten posts with a link to each post.
+4. If you'd like to display additional information, feel free to embellish on the assignment.
+*/
+
+const challenge7Button = document.getElementById("submit-text-button-challenge-7");
+const challenge7TextBox = document.getElementById("challenge-7-text-box");
+const challenge7Output = document.getElementById("challenge-7-output");
+
+function clickChallenge7Button () {
+    const userInput = challenge7TextBox.value;
+
+    if (userInput === "") {
+        challenge7Output.textContent = "";
+        challenge7Output.append("You didn't submit any text!");
+    }
+
+    else if (userInput != "") {
+        challenge7Output.textContent = "";
+        const challenge7OutputOrderedList = document.createElement("ol");
+
+        fetch(`https://www.reddit.com/r/${userInput}/top.json?limit=10`)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                    if (data.status === "error") {
+                        dogArea.innerHTML = "<p>That apparently isn't a subreddit.</p>"
+                    }
+                    else {
+                        /*
+                        const postTitle = data.title;
+                        const postUrl = data.address;
+                        postLink.href = postUrl;
+                        challenge7Output.append(challenge7OutputOrderedList);
+                        challenge7OutputOrderedList.append(postTitle, postUrl);
+                        */
+                       console.log(`https://www.reddit.com${data.children[0].data.permalink}`)
+                    }
+            });
+    }
+}
+
+challenge7Button.addEventListener('click', clickChallenge7Button)
