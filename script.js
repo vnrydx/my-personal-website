@@ -98,6 +98,10 @@ window.addEventListener("mousemove", hueRotatePenguin);
 2. Bonus points if you also empty out the text field when that happens.
 3. When additional messages are submitted, append them below rather than replacing them.
 4. Make it so that the text in the to do list for each new entry gets bigger.
+Incomplete:
+5. When an item gets added to the list, add a checkbox to the left side of the item.
+6. When a checkbox is checked, put a strike through the text of the item.
+7. For bonus points, if a checkbox gets unchecked, remove the strike through.
 */
 
 const challenge5TextBox = document.getElementById("challenge-5-text-box");
@@ -109,16 +113,34 @@ submitTextButtonChallenge5.addEventListener('click', updateValue);
 let textSizeIncrementor = 16;
 
 function updateValue() {
-    let newEntry = document.createElement("p");
+    let newEntry = document.createElement("span");
     
     newEntry.textContent = challenge5TextBox.value;
     newEntry.style.fontSize = `${textSizeIncrementor}px`;
 
-    toDoList.append(newEntry);
+    const toDoListItemDiv = document.createElement("div");
+    toDoListItemDiv.classList.add("to-do-list-div");
+
+    const checkBox = document.createElement('input');
+    checkBox.type = "checkbox";
+
+    toDoList.append(toDoListItemDiv);
+
+    toDoListItemDiv.append(checkBox, " ", newEntry);
+
+    function clickCheckBox () {
+        if (checkBox.checked) {
+            newEntry.classList.add("line-through-text");
+        }
+        else {
+            newEntry.classList.remove("line-through-text");
+        }
+    }
+
+    checkBox.addEventListener('click', clickCheckBox);
 
     textSizeIncrementor++;
 
     challenge5TextBox.value = "";
 }
-
 

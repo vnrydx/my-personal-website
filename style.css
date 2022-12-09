@@ -13,3 +13,11 @@ body {
 #challenge-5-values {
     white-space: pre;
 }
+
+.line-through-text {
+text-decoration: line-through
+}
+
+.to-do-list-div {
+    padding-top: 10px;
+}
