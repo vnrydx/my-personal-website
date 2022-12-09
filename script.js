@@ -166,6 +166,7 @@ function clickChallenge6Button () {
     let dogBreed = challenge6TextBox.value;
     dogBreed = dogBreed.toLowerCase();
     dogBreed = dogBreed.replace(/ /g, "");
+    dogBreed = dogBreed.replace(/[^0-9a-z]/gi, "");
 
     if (dogBreed === "") {
         dogArea.textContent = "";
